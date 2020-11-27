@@ -1,2 +1,7 @@
-[managed-hosts]
-patrick02.home.local
+[group1]
+patrick02
+patrick03
+
+[group2]
+patrick04
+patrick05

@@ -1,0 +1,43 @@
+---
+- name: "Mein erstes Play"
+  hosts: group1
+  gather_facts: false
+  tasks:
+    - name: "Meine erster Task"
+      yum:
+        name: httpd
+        state: present
+
+    - name: "Kopiere index.html to folder"
+      copy:
+        src: "index.html"
+        dest: "/var/www/html/index.html"
+
+    - name: "Enable httpd-service"
+      service:
+        name: httpd
+        state: started
+        enabled: true
+      notify:
+        - "restart httpd"
+
+    - name: "Open firewall port 80"
+      firewalld:
+        service: http
+        permanent: "true"
+        state: enabled
+      notify:
+        - "restart firewalld"
+
+
+  handlers:
+    - name: "restart firewalld"
+      service:
+        name: firewalld
+        state: restarted
+
+    - name: "restart httpd"
+      service:
+        name: httpd
+        state: restarted
+...
