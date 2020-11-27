@@ -1,0 +1,31 @@
+---
+- name: "Mein erstes Playbook"
+  hosts: all
+  gather_facts: "false"
+  tasks: 
+
+  - name: install the latest version of Apache
+    yum:
+      name: httpd
+      state: latest
+  - name: Copy file with owner and permissions
+    copy:
+      src: /root/test/test.html
+      dest: /var/www/html/index.html
+  - name: permit traffic in default zone for https service
+    firewalld:
+      service: http
+      permanent: yes
+      state: enabled
+  - name: Start service httpd and enable service
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+#  - name: Add a line to a file if the file does not exist
+#    lineinfile:
+#      path: /tmp/testfile
+#      line: 192.168.1.99 foo.lab.net foo
+#      create: yes
+
+...
