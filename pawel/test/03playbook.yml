@@ -1,0 +1,16 @@
+---
+- name: "Mein erstes Playbook"
+  hosts: all
+  gather_facts: "false"
+  vars:
+    paket: "bind-utils-9.11.4-26.P2.el7_9.2.x86_64"
+  tasks:
+
+  - name: "install with Variable: {{paket}}"
+    yum:
+      name: "{{paket}}"
+      state: latest
+
+...
+
+
