@@ -18,13 +18,14 @@
         name: "peter"
         uid: "1001"
         state: "present"
-    - name: "Lege den Benutzer Peter an"
-      user:
-        name: "ansible"
-        uid: "1005"
-        state: "present"
-        password: "$6$NM0zpvfPqL2R9yE2$46WfMXRBivDodOWHN64EJj3oXQz513OMsDS0RhOAYuz7SEc8gPejKzfK39H.DsRebaMPb7ym2urT2KJVS424n."
+#    - name: "Lege den Benutzer ansible an"
+#      user:
+#        name: "ansible"
+#        uid: "1005"
+#        state: "present"
+#        password: "$6$NM0zpvfPqL2R9yE2$46WfMXRBivDodOWHN64EJj3oXQz513OMsDS0RhOAYuz7SEc8gPejKzfK39H.DsRebaMPb7ym2urT2KJVS424n."
     - name: "Sudoers anpassen"
+      become: "true"
       lineinfile:
         path: "/etc/sudoers"
         state: "present"
