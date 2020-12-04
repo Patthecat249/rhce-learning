@@ -1,0 +1,4 @@
+1. lege benutzer ansible auf allen systemen an
+2. gebe dem benutzer sudo-berechtigungen
+3. erstelle ein ssh-keypair, so dass eine automatisierte anmeldung an allen systemen möglich ist
+4. verteile den public-key auf alle hosts
