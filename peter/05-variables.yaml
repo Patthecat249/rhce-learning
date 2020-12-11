@@ -1,0 +1,11 @@
+---
+- name: "Name des Playbooks"
+  hosts: all
+  vars:
+    softwarepaket: "nginx"
+  tasks:
+    - name: "Installiere {{ softwarepaket }}"
+      yum:
+        name: "{{ softwarepaket }}"
+        state: "present"
+...   

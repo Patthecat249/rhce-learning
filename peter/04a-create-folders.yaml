@@ -1,0 +1,12 @@
+---
+- name: "Playbook"
+  hosts: all
+  gather_facts: "false"
+  tasks:
+    - name: "Create working directories"
+      file: 
+        path: "{{ item }}"
+        state: "directory"
+      with_items:
+        - "/home/ansible/sva"
+...

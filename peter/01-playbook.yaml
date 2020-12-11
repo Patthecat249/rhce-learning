@@ -1,35 +1,45 @@
 ---
-- name: "Mein erstes Play"
-  hosts: all
+#
+# create passwd: ansible all -i localhost, -m debug -a "msg={{ 'Test1234' | password_hash('sha512', '') }}"
+#
+- name: "Playbook 01 - Ansible Setup - als root ausführen"
+  hosts: pebo02, pebo03
   gather_facts: "false"
   tasks:
-    - name: "Lege den Benutzer Patrick an"
+    - name: "Lege den Benutzer patrick an"
       user:
         name: "patrick"
-        uid: "1002"
-        state: "present"
-    - name: "Lege den Benutzer Pawel an"
-      user:
-        name: "pawel"
-        uid: "1000"
-        state: "present"
-    - name: "Lege den Benutzer Peter an"
-      user:
-        name: "peter"
         uid: "1001"
         state: "present"
-#    - name: "Lege den Benutzer ansible an"
-#      user:
-#        name: "ansible"
-#        uid: "1005"
-#        state: "present"
-#        password: "$6$NM0zpvfPqL2R9yE2$46WfMXRBivDodOWHN64EJj3oXQz513OMsDS0RhOAYuz7SEc8gPejKzfK39H.DsRebaMPb7ym2urT2KJVS424n."
-    - name: "Sudoers anpassen"
+        password: "$6$NM0zpvfPqL2R9yE2$46WfMXRBivDodOWHN64EJj3oXQz513OMsDS0RhOAYuz7SEc8gPejKzfK39H.DsRebaMPb7ym2urT2KJVS424n."
+
+    - name: "Lege den Benutzer peter an"
+      user:
+        name: "peter"
+        uid: "1002"
+        state: "present"
+        password: "$6$NM0zpvfPqL2R9yE2$46WfMXRBivDodOWHN64EJj3oXQz513OMsDS0RhOAYuz7SEc8gPejKzfK39H.DsRebaMPb7ym2urT2KJVS424n."
+
+    - name: "Lege den Benutzer pawel an"
+      user:
+        name: "pawel"
+        uid: "1003"
+        state: "present"
+        password: "$6$NM0zpvfPqL2R9yE2$46WfMXRBivDodOWHN64EJj3oXQz513OMsDS0RhOAYuz7SEc8gPejKzfK39H.DsRebaMPb7ym2urT2KJVS424n."
+
+    - name: "Lege den Benutzer ansible an"
+      user:
+        name: "ansible"
+        uid: "1004"
+        state: "present"
+        password: "$6$NM0zpvfPqL2R9yE2$46WfMXRBivDodOWHN64EJj3oXQz513OMsDS0RhOAYuz7SEc8gPejKzfK39H.DsRebaMPb7ym2urT2KJVS424n."
+
+    - name: "Sudoers fuer ansible-user anpassen"
       become: "true"
       lineinfile:
         path: "/etc/sudoers"
         state: "present"
-        line: "%ansible        ALL=(ALL)       ALL"
+        line: "%ansible        ALL=(ALL)     NOPASSWD: ALL"
 
 #    - name: "Kopiere test-datei auf managed-hosts"
 #      copy:

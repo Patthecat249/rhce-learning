@@ -1,0 +1,52 @@
+---
+- name: "Webserver Play"
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Install software"
+      yum:
+        name:
+          - httpd
+          - mariadb-server
+          - firewalld
+          - php
+          - php-mysqlnd
+        state: latest
+
+    - name: "Enable Firewall"
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: "Open Firewall-Port 80"
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+
+    - name: "Enable mariadb"
+      service:
+        name: mariadb
+        state: started
+        enabled: true
+
+    - name: "Enable httpd"
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: "Download patrick02.php to web-servers"
+      get_url:
+        url: http://patrick02/patrick.php
+        dest: "/var/www/html/index.php"
+        mode: 0644
+
+    - name: "Check phpinfo is reachable"
+      uri:
+        url: "http://patrick03/index.php"
+        status_code: 200
+      tags:
+        - test

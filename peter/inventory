@@ -1,6 +1,7 @@
-[managed_hosts]
-pebo02.home.local
+[group1]
+pebo02
 pebo03
+
+[group2]
 pebo04
 peter05
-
