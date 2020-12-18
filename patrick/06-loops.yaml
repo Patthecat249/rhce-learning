@@ -4,5 +4,7 @@
   gather_facts: "false"
   tasks:
     - name: "01 - Erstelle Arbeitsordner"
-
+      yum:
+        name: "nginx"
+        state: "present"
 ...

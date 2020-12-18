@@ -1,0 +1,13 @@
+---
+- name: "Install software packages"
+  hosts: all
+  gather_facts: "false"
+  tasks:
+    - name: "Install some software"
+      yum:
+        name:
+          - "epel-release"
+          - "wget"
+#          - "yamllint"
+        state: "present"
+...

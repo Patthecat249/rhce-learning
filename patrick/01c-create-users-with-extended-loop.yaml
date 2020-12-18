@@ -1,0 +1,25 @@
+---
+- name: "Create Users in loop"
+  hosts: all
+  gather_facts: "false"
+  vars:
+    exist: "present"
+  tasks:
+    - name: "Lege die Benutzer in einer Loop an"
+      user:
+        name: "{{item.name}}"
+        uid: "{{item.uid}}"
+        password: "$6$b.i4Ov06s4b3Z8kX$PkO3lGzJVBs9cr63pUa80iNSh4wlZ6DlrLDBKWlDfE.mP.3Lgf67EYS.uF//HrlU2K4BAoMbqeal.AK4inzWD1"
+        state: "{{exist}}"
+      loop:
+        - name: "user11"
+          uid: 1011
+        - name: "user12"
+          uid: 1012
+        - name: "user13"
+          uid: 1013
+        - name: "user14"
+          uid: 1014
+        - name: "user15"
+          uid: 1015
+...

@@ -1,0 +1,41 @@
+---
+- name: "Mein erstes Play"
+  hosts: all
+  gather_facts: "false"
+  tasks:
+    - name: "Lege den Benutzer Patrick an"
+      user:
+        name: "patrick"
+        uid: "1000"
+        password: "$6$b.i4Ov06s4b3Z8kX$PkO3lGzJVBs9cr63pUa80iNSh4wlZ6DlrLDBKWlDfE.mP.3Lgf67EYS.uF//HrlU2K4BAoMbqeal.AK4inzWD1"
+        state: "present"
+    - name: "Lege den Benutzer Pawel an"
+      user:
+        name: "pawel"
+        uid: "1001"
+        password: "$6$b.i4Ov06s4b3Z8kX$PkO3lGzJVBs9cr63pUa80iNSh4wlZ6DlrLDBKWlDfE.mP.3Lgf67EYS.uF//HrlU2K4BAoMbqeal.AK4inzWD1"
+        state: "present"
+    - name: "Lege den Benutzer Peter an"
+      user:
+        name: "peter"
+        uid: "1002"
+        password: "$6$b.i4Ov06s4b3Z8kX$PkO3lGzJVBs9cr63pUa80iNSh4wlZ6DlrLDBKWlDfE.mP.3Lgf67EYS.uF//HrlU2K4BAoMbqeal.AK4inzWD1"
+        state: "present"
+    - name: "Lege den Benutzer Ansible an"
+      user:
+        name: "ansible"
+        uid: "1003"
+        state: "present"
+        password: "$6$b.i4Ov06s4b3Z8kX$PkO3lGzJVBs9cr63pUa80iNSh4wlZ6DlrLDBKWlDfE.mP.3Lgf67EYS.uF//HrlU2K4BAoMbqeal.AK4inzWD1"
+    - name: "Kopiere test-datei auf managed-hosts"
+      copy:
+        src: "./test-datei.txt"
+        dest: "/root/abgelegte-datei.txt"
+    - name: "Install some software"
+      yum:
+        name:
+          - "epel-release"
+          - "wget"
+          - "yamllint"
+        state: "present"
+...
